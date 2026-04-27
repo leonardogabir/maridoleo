@@ -34,6 +34,7 @@
     --gray-light: #f4f7fc;
     --gray: #8899aa;
     --text: #1a1a2e;
+    --hero-bg: #f0f4fb;
   }
 
   html { scroll-behavior: smooth; }
@@ -45,22 +46,23 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
+  /* NAV — light version */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(13,41,89,0.97);
+    background: rgba(255,255,255,0.97);
     backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 5%;
     height: 64px;
     border-bottom: 2px solid var(--orange);
+    box-shadow: 0 2px 16px rgba(13,41,89,0.08);
   }
   .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .nav-logo img { width: 40px; height: 40px; border-radius: 50%; background: white; object-fit: contain; }
-  .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: white; letter-spacing: 0.05em; }
+  .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: 0.05em; }
   .nav-logo-text span { color: var(--orange); }
   .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a { color: var(--navy); text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--orange); }
   .nav-cta {
     background: var(--orange); color: white; border: none; cursor: pointer;
@@ -70,98 +72,81 @@
   }
   .nav-cta:hover { background: var(--orange-light); }
 
-  /* HERO */
+  /* HERO — foto de fundo desfocada */
   .hero {
     min-height: 100vh;
-    background: var(--navy);
     display: flex; align-items: center;
-    padding: 80px 5% 0;
+    padding: 80px 5% 60px;
     position: relative;
     overflow: hidden;
+    background: #0a1628;
   }
-  .hero::before {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 55%; height: 100%;
-    background: var(--navy-light);
-    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1400&q=80');
+    background-size: cover; background-position: center;
+    filter: blur(3px) brightness(0.32);
+    transform: scale(1.05);
   }
-  .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 40px; align-items: center;
-    width: 100%; max-width: 1100px; margin: 0 auto;
-    position: relative; z-index: 1;
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(120deg, rgba(13,41,89,0.85) 40%, rgba(245,124,0,0.15) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 700px;
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(245,124,0,0.15); border: 1px solid rgba(245,124,0,0.4);
+    background: rgba(245,124,0,0.18); border: 1px solid rgba(245,124,0,0.5);
     color: var(--orange); border-radius: 20px;
     padding: 5px 14px; font-size: 12px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px;
   }
   .hero h1 {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(42px, 6vw, 72px);
-    font-weight: 900; line-height: 1;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900; line-height: 0.95;
     color: white; text-transform: uppercase;
     letter-spacing: 0.02em; margin-bottom: 8px;
   }
   .hero h1 .highlight { color: var(--orange); display: block; }
   .hero-sub {
-    color: rgba(255,255,255,0.6); font-size: 16px;
-    line-height: 1.6; margin: 16px 0 32px;
-    max-width: 420px;
+    color: rgba(255,255,255,0.7); font-size: 17px;
+    line-height: 1.6; margin: 20px 0 36px;
+    max-width: 500px;
   }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
   .btn-primary {
     background: var(--orange); color: white;
-    padding: 14px 28px; border-radius: 4px;
-    font-weight: 700; font-size: 14px; text-decoration: none;
+    padding: 16px 32px; border-radius: 6px;
+    font-weight: 700; font-size: 15px; text-decoration: none;
     letter-spacing: 0.05em; text-transform: uppercase;
-    transition: transform 0.15s, background 0.2s;
+    transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
     display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(245,124,0,0.4);
   }
-  .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,124,0,0.5); }
   .btn-outline {
-    background: transparent; color: white;
-    border: 1.5px solid rgba(255,255,255,0.3);
-    padding: 14px 28px; border-radius: 4px;
-    font-weight: 700; font-size: 14px; text-decoration: none;
+    background: rgba(255,255,255,0.08); color: white;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 16px 32px; border-radius: 6px;
+    font-weight: 700; font-size: 15px; text-decoration: none;
     letter-spacing: 0.05em; text-transform: uppercase;
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
     display: inline-flex; align-items: center; gap: 8px;
+    backdrop-filter: blur(4px);
   }
-  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-outline:hover { border-color: var(--orange); background: rgba(245,124,0,0.1); }
   .hero-stats {
-    display: flex; gap: 32px; margin-top: 40px;
-    padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; gap: 36px; margin-top: 48px;
+    padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.12);
   }
   .stat-num {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 32px; font-weight: 900; color: var(--orange); line-height: 1;
+    font-size: 36px; font-weight: 900; color: var(--orange); line-height: 1;
   }
-  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 500; margin-top: 2px; }
-  .hero-image {
-    position: relative; display: flex;
-    justify-content: center; align-items: flex-end;
-  }
-  .hero-img-wrap {
-    position: relative; width: 340px;
-  }
-  .hero-img-wrap img {
-    width: 100%; border-radius: 8px 8px 0 0;
-    display: block; object-fit: cover; object-position: center center;
-    height: 480px;
-  }
-  .hero-img-badge {
-    position: absolute; bottom: 20px; left: -20px;
-    background: var(--orange); color: white;
-    padding: 12px 16px; border-radius: 6px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.06em; line-height: 1.3;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 500; margin-top: 3px; }
 
   /* SECTION BASE */
   section { padding: 80px 5%; }
@@ -205,7 +190,7 @@
   .feature-title { font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 2px; }
   .feature-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
 
-  /* SERVIÇOS */
+  /* SERVIÇOS — clicáveis */
   .services { background: var(--navy); }
   .services .section-title { color: white; }
   .services .section-desc { color: rgba(255,255,255,0.5); }
@@ -213,18 +198,25 @@
   .service-card {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 8px; padding: 28px 24px;
+    border-radius: 10px; padding: 28px 24px;
     transition: border-color 0.2s, background 0.2s, transform 0.2s;
-    cursor: default;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .service-card::after {
+    content: 'Solicitar →';
+    position: absolute; bottom: 16px; right: 20px;
+    font-size: 11px; font-weight: 700; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    opacity: 0; transition: opacity 0.2s;
   }
   .service-card:hover {
     border-color: var(--orange);
-    background: rgba(245,124,0,0.07);
-    transform: translateY(-3px);
+    background: rgba(245,124,0,0.08);
+    transform: translateY(-4px);
   }
-  .service-card-icon {
-    font-size: 32px; margin-bottom: 16px; display: block;
-  }
+  .service-card:hover::after { opacity: 1; }
+  .service-card-icon { font-size: 32px; margin-bottom: 16px; display: block; }
   .service-card h3 {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 20px; font-weight: 700; color: white;
@@ -238,32 +230,89 @@
     border-radius: 3px; text-transform: uppercase; letter-spacing: 0.06em;
   }
 
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(7,15,30,0.85);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+  .modal {
+    background: #0d2959;
+    border: 1px solid rgba(245,124,0,0.3);
+    border-radius: 16px; padding: 36px;
+    max-width: 520px; width: 100%;
+    transform: translateY(20px);
+    transition: transform 0.25s;
+    position: relative;
+  }
+  .modal-overlay.active .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.4); font-size: 22px;
+    transition: color 0.2s; line-height: 1;
+  }
+  .modal-close:hover { color: var(--orange); }
+  .modal-icon { font-size: 36px; margin-bottom: 8px; }
+  .modal h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px; font-weight: 900; color: white;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .modal-subtitle { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 24px; }
+  .modal-options { display: flex; flex-direction: column; gap: 10px; }
+  .modal-option {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; padding: 14px 18px;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    text-align: left; width: 100%;
+    color: white; font-family: 'Barlow', sans-serif;
+  }
+  .modal-option:hover { border-color: var(--orange); background: rgba(245,124,0,0.08); }
+  .modal-option-icon { font-size: 22px; flex-shrink: 0; }
+  .modal-option-text { font-size: 14px; font-weight: 600; }
+  .modal-option-desc { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
   /* GALERIA */
   .gallery .section-header { margin-bottom: 40px; }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .gallery-item {
-    border-radius: 8px; overflow: hidden;
-    aspect-ratio: 4/3;
-    background: var(--gray-light);
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid #e0e8f0;
+    border-radius: 10px; overflow: hidden;
+    aspect-ratio: 4/3; position: relative;
+    background: #111;
+    cursor: pointer;
   }
-  .gallery-placeholder {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    color: var(--gray);
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease, filter 0.3s ease;
+    filter: brightness(0.92);
   }
-  .gallery-placeholder span { font-size: 32px; }
-  .gallery-placeholder p { font-size: 12px; font-weight: 600; text-align: center; line-height: 1.4; }
+  .gallery-item:hover img { transform: scale(1.06); filter: brightness(0.6); }
+  .gallery-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 14px 16px;
+    background: linear-gradient(to top, rgba(13,41,89,0.9), transparent);
+    color: white; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em;
+    transform: translateY(4px);
+    transition: transform 0.3s;
+  }
+  .gallery-item:hover .gallery-label { transform: translateY(0); }
   .gallery-note {
     text-align: center; margin-top: 24px;
     color: var(--gray); font-size: 13px;
     background: var(--gray-light); padding: 14px; border-radius: 6px;
   }
+  @media (max-width: 768px) { .gallery-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
 
   /* CONTATO */
   .contato { background: var(--navy); }
@@ -347,7 +396,7 @@
 
   /* HAMBURGER MOBILE */
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-  .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+  .hamburger span { width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: 0.3s; }
 
   /* DEPOIMENTOS */
   .depoimentos { background: var(--gray-light); }
@@ -434,9 +483,9 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .hero-grid { grid-template-columns: 1fr; }
-    .hero-image { display: none; }
+    .hero-image { display: flex; margin-top: 20px; }
+    .hero-svg-wrap { max-width: 280px; }
     .hero { padding-top: 100px; padding-bottom: 60px; min-height: auto; }
-    .hero::before { display: none; }
     .sobre-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr 1fr; }
     .gallery-grid { grid-template-columns: 1fr 1fr; }
@@ -472,39 +521,32 @@
 
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-grid">
-    <div class="hero-content">
-      <div class="hero-badge">⚡ Tangará da Serra - MT</div>
-      <h1>Reparos &<span class="highlight">Elétrica</span></h1>
-      <p class="hero-sub">Serviços elétricos residenciais, automação, hidráulica e muito mais. Atendimento rápido, seguro e com qualidade garantida.</p>
-      <div class="hero-btns">
-        <a href="https://wa.me/5565993453464" class="btn-primary" target="_blank">💬 Chamar no WhatsApp</a>
-        <a href="#servicos" class="btn-outline">Ver Serviços</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Comprometido</div>
-        </div>
-        <div>
-          <div class="stat-num">6+</div>
-          <div class="stat-label">Serviços Oferecidos</div>
-        </div>
-        <div>
-          <div class="stat-num">0$</div>
-          <div class="stat-label">Orçamento sem custo</div>
-        </div>
-      </div>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⚡ Tangará da Serra - MT</div>
+    <h1>Reparos &<span class="highlight">Elétrica</span></h1>
+    <p class="hero-sub">Serviços elétricos residenciais, automação, hidráulica e muito mais. Atendimento rápido, seguro e com qualidade garantida.</p>
+    <div class="hero-btns">
+      <a href="#contato" class="btn-primary">💬 Solicitar Orçamento</a>
+      <a href="#servicos" class="btn-outline">Ver Serviços ↓</a>
     </div>
-    <div class="hero-image">
-      <div class="hero-img-wrap">
-        <img src="Gemini_Generated_Image_6frwu26frwu26frw.png" alt="Léo — Técnico Elétrico" onerror="this.style.background='#1a3a6e';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center'">
-        <div class="hero-img-badge">Reparos &<br>Serviços Elétricos</div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Comprometido</div>
+      </div>
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Tipos de Serviço</div>
+      </div>
+      <div>
+        <div class="stat-num">0$</div>
+        <div class="stat-label">Orçamento sem custo</div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- SOBRE -->
 <section class="sobre" id="sobre">
   <div class="container">
@@ -550,43 +592,54 @@
   <div class="container">
     <div class="section-label" style="color: var(--orange);">O que eu faço</div>
     <h2 class="section-title">Nossos <span>Serviços</span></h2>
-    <p class="section-desc">Do elétrico ao hidráulico, resolvo os problemas da sua casa com agilidade e profissionalismo.</p>
+    <p class="section-desc">Clique em um serviço para escolher o que você precisa e solicitar orçamento.</p>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card" onclick="abrirModal('eletrica')">
         <span class="service-card-icon">⚡</span>
         <h3>Elétrica Residencial</h3>
-        <p>Instalação, reparo e manutenção de toda a parte elétrica da sua casa. Tomadas, disjuntores, fiação e mais.</p>
+        <p>Instalação, reparo e manutenção de toda a parte elétrica da sua casa.</p>
         <span class="service-card-tag">Principal</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" onclick="abrirModal('automacao')">
         <span class="service-card-icon">🏠</span>
         <h3>Automação Residencial</h3>
-        <p>Interruptores inteligentes, sensores de presença, sistemas de controle e modernização da sua residência.</p>
+        <p>Interruptores inteligentes, sensores de presença e modernização da sua residência.</p>
         <span class="service-card-tag">Destaque</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" onclick="abrirModal('hidraulica')">
         <span class="service-card-icon">🔧</span>
         <h3>Hidráulica</h3>
-        <p>Conserto de vazamentos, instalação de torneiras, chuveiros, registros e reparos hidráulicos em geral.</p>
+        <p>Conserto de vazamentos, instalação de torneiras, chuveiros e reparos hidráulicos.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" onclick="abrirModal('montagem')">
         <span class="service-card-icon">🪛</span>
         <h3>Montagem e Instalação</h3>
-        <p>Móveis, TVs, suportes, prateleiras, ar-condicionado e tudo que precisar ser montado ou instalado.</p>
+        <p>Móveis, TVs, suportes, prateleiras, ar-condicionado e muito mais.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" onclick="abrirModal('reparos')">
         <span class="service-card-icon">🔨</span>
         <h3>Pequenos Reparos</h3>
-        <p>Consertos diversos, retoques, ajustes e qualquer reparo que sua casa precisa.</p>
+        <p>Consertos diversos, retoques e qualquer reparo que sua casa precisa.</p>
       </div>
-      <div class="service-card">
+      <div class="service-card" onclick="abrirModal('ajustes')">
         <span class="service-card-icon">⚙️</span>
         <h3>Ajustes Gerais</h3>
-        <p>Portas, janelas, fechaduras, dobradiças e os mil ajustes do dia a dia que fazem diferença no conforto.</p>
+        <p>Portas, janelas, fechaduras e os ajustes do dia a dia que fazem diferença.</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- MODAL DE SERVIÇOS -->
+<div class="modal-overlay" id="modalOverlay" onclick="fecharModalFora(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="fecharModal()">✕</button>
+    <div class="modal-icon" id="modalIcon"></div>
+    <h3 id="modalTitulo"></h3>
+    <p class="modal-subtitle">Selecione o que você precisa:</p>
+    <div class="modal-options" id="modalOpcoes"></div>
+  </div>
+</div>
 
 <!-- GALERIA -->
 <section class="gallery" id="galeria">
@@ -597,40 +650,28 @@
     </div>
     <div class="gallery-grid">
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <span>⚡</span>
-          <p>Instalação Elétrica</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1565814636199-ae8133055c1c?w=700&q=85" alt="Iluminação jardim noturna" loading="lazy">
+        <div class="gallery-label">💡 Iluminação Externa</div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <span>🏠</span>
-          <p>Automação Residencial</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85" alt="Quadro elétrico instalado" loading="lazy">
+        <div class="gallery-label">⚡ Quadro Elétrico</div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <span>🔧</span>
-          <p>Reparo Hidráulico</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=85" alt="Iluminação interna moderna" loading="lazy">
+        <div class="gallery-label">💡 Iluminação Interna</div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <span>🪛</span>
-          <p>Montagem de Móveis</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=85" alt="Cozinha com iluminação LED" loading="lazy">
+        <div class="gallery-label">🔌 Pontos Elétricos</div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <span>🔌</span>
-          <p>Quadro Elétrico</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=700&q=85" alt="Iluminação sala de estar" loading="lazy">
+        <div class="gallery-label">🏠 Automação Residencial</div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <span>💡</span>
-          <p>Iluminação</p>
-        </div>
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=85" alt="Instalação elétrica acabamento" loading="lazy">
+        <div class="gallery-label">🔧 Instalação Completa</div>
       </div>
     </div>
     <p class="gallery-note">📸 Em breve fotos reais dos nossos serviços. Me chame no WhatsApp e veja o resultado do meu trabalho!</p>
@@ -762,6 +803,7 @@
 <a href="https://wa.me/5565993453464" class="whatsapp-float" target="_blank" title="Chamar no WhatsApp">💬</a>
 
 <script>
+  // MENU MOBILE
   function toggleMenu() {
     const links = document.querySelector('.nav-links');
     if (links.style.display === 'flex') {
@@ -773,7 +815,8 @@
       links.style.top = '64px';
       links.style.left = '0';
       links.style.right = '0';
-      links.style.background = '#0d2959';
+      links.style.background = '#ffffff';
+      links.style.borderBottom = '2px solid #f57c00';
       links.style.padding = '20px';
       links.style.gap = '16px';
     }
@@ -784,6 +827,7 @@
     });
   });
 
+  // FORMULÁRIO DE ORÇAMENTO
   function enviarOrcamento(e) {
     e.preventDefault();
     const nome = document.getElementById('nome').value;
@@ -794,6 +838,113 @@
     const url = `https://wa.me/5565993453464?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
     window.location.href = 'obrigado.html';
+  }
+
+  // DADOS DOS SERVIÇOS
+  const servicos = {
+    eletrica: {
+      icon: '⚡',
+      titulo: 'Elétrica Residencial',
+      opcoes: [
+        { icon: '🏗️', texto: 'Instalação nova (casa em construção)', desc: 'Projeto elétrico completo para obra nova' },
+        { icon: '🔧', texto: 'Reparo / manutenção elétrica', desc: 'Curto, disjuntor, fiação, tomada com problema' },
+        { icon: '📷', texto: 'Instalação de câmeras', desc: 'Câmeras de segurança residencial' },
+        { icon: '⚡', texto: 'Cerca elétrica', desc: 'Instalação ou manutenção de cerca elétrica' },
+        { icon: '🔌', texto: 'Tomada / ponto elétrico', desc: 'Novas tomadas, pontos de força, USB' },
+        { icon: '🚿', texto: 'Chuveiro elétrico', desc: 'Instalação ou troca de chuveiro' },
+        { icon: '💡', texto: 'Iluminação / LED', desc: 'Spots, fitas LED, luminárias' },
+        { icon: '📋', texto: 'Outro', desc: 'Me conta o que você precisa' },
+      ]
+    },
+    automacao: {
+      icon: '🏠',
+      titulo: 'Automação Residencial',
+      opcoes: [
+        { icon: '💡', texto: 'Interruptores inteligentes', desc: 'Controle de luz pelo celular ou voz' },
+        { icon: '👁️', texto: 'Sensor de presença', desc: 'Luzes automáticas em áreas da casa' },
+        { icon: '🔒', texto: 'Fechadura eletrônica / biométrica', desc: 'Porta automática com senha ou digital' },
+        { icon: '📱', texto: 'Central de automação', desc: 'Sistema integrado para controle da casa' },
+        { icon: '📋', texto: 'Outro', desc: 'Me conta o que você precisa' },
+      ]
+    },
+    hidraulica: {
+      icon: '🔧',
+      titulo: 'Hidráulica',
+      opcoes: [
+        { icon: '💧', texto: 'Conserto de vazamento', desc: 'Cano, registro, encanamento em geral' },
+        { icon: '🚰', texto: 'Instalação de torneira / registro', desc: 'Troca ou instalação nova' },
+        { icon: '🚿', texto: 'Chuveiro / box', desc: 'Instalação, reparo ou substituição' },
+        { icon: '🪠', texto: 'Entupimento', desc: 'Desentupimento de pia, vaso, ralo' },
+        { icon: '📋', texto: 'Outro', desc: 'Me conta o que você precisa' },
+      ]
+    },
+    montagem: {
+      icon: '🪛',
+      titulo: 'Montagem e Instalação',
+      opcoes: [
+        { icon: '🛋️', texto: 'Montagem de móveis', desc: 'Armários, estantes, camas, escritório' },
+        { icon: '📺', texto: 'TV na parede / suporte', desc: 'Fixação de TV e passagem de cabo' },
+        { icon: '❄️', texto: 'Ar-condicionado', desc: 'Instalação ou manutenção de ar-condicionado' },
+        { icon: '📦', texto: 'Prateleiras / suportes', desc: 'Fixação de prateleiras e objetos na parede' },
+        { icon: '📋', texto: 'Outro', desc: 'Me conta o que você precisa' },
+      ]
+    },
+    reparos: {
+      icon: '🔨',
+      titulo: 'Pequenos Reparos',
+      opcoes: [
+        { icon: '🚪', texto: 'Porta / janela', desc: 'Ajuste, reparo ou instalação' },
+        { icon: '🔑', texto: 'Fechadura / maçaneta', desc: 'Troca ou reparo de fechadura' },
+        { icon: '🪟', texto: 'Vidro / janela', desc: 'Fixação, vedação ou reparo' },
+        { icon: '🖼️', texto: 'Fixação de quadros / espelhos', desc: 'Itens para pendurar na parede' },
+        { icon: '📋', texto: 'Outro', desc: 'Me conta o que você precisa' },
+      ]
+    },
+    ajustes: {
+      icon: '⚙️',
+      titulo: 'Ajustes Gerais',
+      opcoes: [
+        { icon: '🚪', texto: 'Porta rangendo / travando', desc: 'Dobradiças, batente, ajuste fino' },
+        { icon: '🔩', texto: 'Parafusos / fixações soltas', desc: 'Aperto e fixação de móveis e estruturas' },
+        { icon: '🪟', texto: 'Janela / persiana', desc: 'Ajuste, reparo ou instalação' },
+        { icon: '📋', texto: 'Outro', desc: 'Me conta o que você precisa' },
+      ]
+    }
+  };
+
+  function abrirModal(tipo) {
+    const s = servicos[tipo];
+    document.getElementById('modalIcon').textContent = s.icon;
+    document.getElementById('modalTitulo').textContent = s.titulo;
+    const container = document.getElementById('modalOpcoes');
+    container.innerHTML = s.opcoes.map(op => `
+      <button class="modal-option" onclick="solicitarOrcamento('${s.titulo}', '${op.texto}')">
+        <span class="modal-option-icon">${op.icon}</span>
+        <div>
+          <div class="modal-option-text">${op.texto}</div>
+          <div class="modal-option-desc">${op.desc}</div>
+        </div>
+      </button>
+    `).join('');
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function fecharModalFora(e) {
+    if (e.target === document.getElementById('modalOverlay')) fecharModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(); });
+
+  function solicitarOrcamento(servico, subservico) {
+    fecharModal();
+    const msg = `Olá Léo! Vim pelo site e preciso de um orçamento.\n\n*Serviço:* ${servico}\n*O que preciso:* ${subservico}`;
+    window.open(`https://wa.me/5565993453464?text=${encodeURIComponent(msg)}`, '_blank');
   }
 </script>
 </body>
